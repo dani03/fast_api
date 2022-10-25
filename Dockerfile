@@ -2,11 +2,11 @@ FROM python:3.10
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt .
+COPY requirements.txt /usr/src/app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . /usr/src/app
 
 EXPOSE 80 
-CMD ["python3", "main.py"]
+CMD ["uvicorn", "main:app", "--reload"]
