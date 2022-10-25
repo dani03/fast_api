@@ -87,7 +87,7 @@ async def show(item: Item):
 
 #query parameters and string validations 
 @app.get("/items/")
-async def read_items(q: str | None = None):
+async def read_items(q: str | None = Query(default=None, max_length=50)):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
