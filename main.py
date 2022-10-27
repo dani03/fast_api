@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI, Query
 from enum import Enum
+from fastapi.testclient import TestClient
 
 from pydantic import BaseModel
 
@@ -20,6 +21,8 @@ class Item(BaseModel):
 
 app = FastAPI()
 
+client = TestClient(app)
+
 @app.get('/')
 async def root():
   return {
@@ -30,6 +33,13 @@ async def root():
 async def read_name(name: str):
   return {"name" : name}
 
+
+def test_root():
+    response = client.get('/')
+    assert response.status_code == 200
+    assert response.json({
+        'data': {' message' : 'salut tout le monde'} 
+  })
 
 @app.get("/user/me")
 async def read_user_me():

@@ -8,5 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /usr/src/app
 
-EXPOSE 80 
+EXPOSE 8000 
+
 CMD ["uvicorn", "main:app", "--reload"]
